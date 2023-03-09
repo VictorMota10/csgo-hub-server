@@ -4,6 +4,7 @@ const socket = require("socket.io");
 const cors = require("@koa/cors");
 const { koaBody } = require("koa-body");
 const json = require("koa-json");
+require('dotenv').config();
 
 let steamRoutes = require("./src/routes/steam.routes");
 
