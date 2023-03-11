@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getBySteamId } from "../Controllers/SteamController";
+import { getBySteamId, getMapStatsPlayerBySteamId, getStatsPlayerBySteamId } from "../Controllers/SteamController";
 
 const Router = require("koa-router");
 
@@ -9,6 +9,18 @@ const router = new Router({
 
 router.get("/:steamid", async (ctx: any, next: any) => {
   const response = await getBySteamId(ctx.params.steamid);
+  ctx.body = response
+  next();
+});
+
+router.get("/stats/:steamid", async (ctx: any, next: any) => {
+  const response = await getStatsPlayerBySteamId(ctx.params.steamid);
+  ctx.body = response
+  next();
+});
+
+router.get("/stats/map/:steamid", async (ctx: any, next: any) => {
+  const response = await getMapStatsPlayerBySteamId(ctx.params.steamid);
   ctx.body = response
   next();
 });
