@@ -4,7 +4,7 @@ const socket = require("socket.io");
 const cors = require("@koa/cors");
 const { koaBody } = require("koa-body");
 const json = require("koa-json");
-require('dotenv').config();
+require("dotenv").config();
 
 let steamRoutes = require("./src/routes/steam.routes");
 
@@ -24,14 +24,26 @@ const io = socket(server, {
   cors: {
     origin: "*",
   },
-})
+});
+
 io.on("connection", (socket: any) => {
-  socket.on("test.event", (data: any) => {
-    io.emit("test.event", data);
+  // pedido de amizade recebido
+  socket.on("invite_received", (data: any) => {
+    io.emit("invite_received_front", data);
   });
-  socket.on("disconnect", () => {
-    console.log("[SOCKET] - disconnect");
+
+  // usuario entra pelo link na lobby
+  socket.on("player_join_lobby", (data: any) => {
+    io.emit("player_join_lobby_front", data);
   });
+
+  socket.on("player_closed_lobby", (data: any) => {
+    io.emit("player_closed_lobby_front", data);
+  });
+
+  // socket.on("disconnect", () => {
+  //   console.log("[SOCKET] - disconnect");
+  // });
 });
 
 server.listen(SERVER_PORT, SERVER_HOST, () => {
