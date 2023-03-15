@@ -35,7 +35,6 @@ export async function getStatsPlayerBySteamId(steamID: any) {
         result = JSON.stringify(response.data)
       })
       .catch(function (error) {
-        console.log(error);
         result = error
       });
 
@@ -54,7 +53,6 @@ export async function getMapStatsPlayerBySteamId(steamID: any) {
         result = JSON.stringify(response.data)
       })
       .catch(function (error) {
-        console.log(error);
         result = error
       });
 

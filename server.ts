@@ -41,6 +41,11 @@ io.on("connection", (socket: any) => {
     io.emit("player_closed_lobby_front", data);
   });
 
+  socket.on("player_leave_lobby", async (data: any) => {
+    await io.emit("player_leave_lobby_front", data);
+  });
+
+
   // socket.on("disconnect", () => {
   //   console.log("[SOCKET] - disconnect");
   // });
