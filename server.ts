@@ -5,13 +5,16 @@ import cors from 'koa-cors'
 import koaBody from 'koa-body'
 import json from 'koa-json'
 import { config } from 'dotenv'
-config()
+
 
 let steamRoutes = require("./src/routes/steam.routes");
 
 const SERVER_PORT = process.env.PORT
 
 const app = new Koa();
+
+config()
+
 // middleware functions
 app.use(koaBody());
 app.use(json());

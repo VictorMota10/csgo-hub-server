@@ -1,7 +1,6 @@
 import axios from "axios";
+import Router from 'koa-router'
 import { getBySteamId, getMapStatsPlayerBySteamId, getStatsPlayerBySteamId } from "../Controllers/SteamController";
-
-const Router = require("koa-router");
 
 const router = new Router({
   prefix: "/steam",
