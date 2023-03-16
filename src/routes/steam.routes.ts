@@ -7,6 +7,11 @@ const router = new Router({
   prefix: "/steam",
 });
 
+router.get("/", async (ctx: any, next: any) => {
+  ctx.body = 'API is OK!'
+  next();
+});
+
 router.get("/:steamid", async (ctx: any, next: any) => {
   const response = await getBySteamId(ctx.params.steamid);
   ctx.body = response
