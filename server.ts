@@ -5,12 +5,6 @@ import cors from 'koa-cors'
 import koaBody from 'koa-body'
 import json from 'koa-json'
 import { config } from 'dotenv'
-// const Koa = require("koa");
-// const http = require("http");
-// const socket = require("socket.io");
-// const cors = require("@koa/cors");
-// const { koaBody } = require("koa-body");
-// const json = require("koa-json");
 config()
 
 let steamRoutes = require("./src/routes/steam.routes");
@@ -64,6 +58,6 @@ io.on("connection", (socket: any) => {
   // });
 });
 
-server.listen(SERVER_PORT, () => {
-  console.log(`listening on port ${SERVER_PORT}`);
+server.listen(3000, () => {
+  console.log(`listening on port ${3000}`);
 });
