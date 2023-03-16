@@ -1,15 +1,21 @@
-const Koa = require("koa");
-const http = require("http");
-const socket = require("socket.io");
-const cors = require("@koa/cors");
-const { koaBody } = require("koa-body");
-const json = require("koa-json");
-require("dotenv").config();
+import Koa from 'koa'
+import http from 'http'
+import { Server } from 'socket.io'
+import cors from 'koa-cors'
+import koaBody from 'koa-body'
+import json from 'koa-json'
+import { config } from 'dotenv'
+// const Koa = require("koa");
+// const http = require("http");
+// const socket = require("socket.io");
+// const cors = require("@koa/cors");
+// const { koaBody } = require("koa-body");
+// const json = require("koa-json");
+config()
 
 let steamRoutes = require("./src/routes/steam.routes");
 
-const SERVER_HOST = "localhost";
-const SERVER_PORT = 8080;
+const SERVER_PORT = process.env.PORT
 
 const app = new Koa();
 // middleware functions
@@ -20,7 +26,7 @@ app.use(cors());
 app.use(steamRoutes.routes());
 
 const server = http.createServer(app.callback());
-const io = socket(server, {
+const io = new Server(server, {
   cors: {
     origin: "*",
   },
@@ -58,6 +64,6 @@ io.on("connection", (socket: any) => {
   // });
 });
 
-server.listen(SERVER_PORT, SERVER_HOST, () => {
+server.listen(SERVER_PORT, () => {
   console.log(`listening on port ${SERVER_PORT}`);
 });
